@@ -40,8 +40,15 @@ public class ServletControlador extends HttpServlet {
 			
 			Aniversario aniversario= new Aniversario(pessoa, data);
 			
-			agenda.adicionarAniversario(aniversario);			
+			agenda.adicionarAniversario(aniversario);		
+			
+		}else if("listar".equals(opcao)) {
+			
+			request.setAttribute("lista", agenda.getAniversarios());
+			proximaPagina= "listar.jsp";		
 		}
+		
+		
 		
 		
 		
