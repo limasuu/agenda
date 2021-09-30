@@ -8,37 +8,70 @@
 		<meta charset="UTF-8"/>
 		<title>Agenda de aniversários</title>
 	</head>
-	<body>
+	<body>		
 		
 		<h3>Lista de aniversários</h3>
 		
-		<table>
+		<%
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");				
+		List<Aniversario> lista= (List<Aniversario>) request.getAttribute("lista");
 		
-			<tr>
-				<td></td>
-				<td>Pessoa</td>
-				<td>Data</td>
-			</tr>
+		if(lista.isEmpty()){
+		%>					
+		<p>Não há aniversários cadastrados</p>
+		<%}else{%>		
+				
 		
-			<%
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		<%if("confirmar-remover".equals(request.getAttribute("opcao")) ||
+			"confirmar-alterar-data".equals(request.getAttribute("opcao"))){				
+		%>
+		<p>Selecione um aniversário:</p>
+		<form action="ServletControlador" method="post">
+		<%}%>	
 			
-			List<Aniversario> lista= (List<Aniversario>) request.getAttribute("lista");
+			<table>
 			
-			for(Aniversario a : lista){
+				<tr>
+					<td></td>
+					<td>Pessoa</td>
+					<td>Data</td>
+				</tr>
+			
+				<%for(Aniversario a : lista){%>	
+							
+				<tr>
+				
+					<%if("confirmar-remover".equals(request.getAttribute("opcao")) ||
+						"confirmar-alterar-data".equals(request.getAttribute("opcao"))){				
+					%>
+					<td><input type="radio" name="id" value=<%=a.getId()%>></input></td>				
+							
+					<%}else{%>
+					<td></td>	
+					<%}%>	
+			
+					<td><%=a.getPessoa()%></td>
+					<td><%=a.getData().format(formatter) %></td>
+				</tr>
+		
+				<%}%>
+			
+			</table>
+						
+			<%if("confirmar-remover".equals(request.getAttribute("opcao")) ||
+				"confirmar-alterar-data".equals(request.getAttribute("opcao"))){				
 			%>
+			
+			<br/>
+			<input type="hidden" name="opcao" value=<%=request.getAttribute("opcao")%>></input>
+			<input type="submit" value="Confirmar"/><br/>
+			
+		</form>		
+		<%}%>
 		
-			<tr>
-				<td><%=a.getId()%></td>
-				<td><%=a.getPessoa()%></td>
-				<td><%=a.getData().format(formatter) %></td>
-			</tr>
-		
-			<%}%>
-		
-		</table>
-		
-		<br/><br/>
+				
+		<%}%>		
+		<br/>
 		
 		<p><a href=ServletControlador>Voltar para a página inicial</a></p>
 	

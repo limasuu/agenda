@@ -42,10 +42,13 @@ public class ServletControlador extends HttpServlet {
 
 			agenda.adicionarAniversario(aniversario);		
 
-		}else if("remover".equals(opcao))
-			proximaPagina= "remover.jsp";
+		}else if("remover".equals(opcao)) {
+			
+			request.setAttribute("opcao", "confirmar-remover");
+			request.setAttribute("lista", agenda.getAniversarios());
+			proximaPagina= "listar.jsp";
 
-		else if("confirmar-remover".equals(opcao)) {
+		}else if("confirmar-remover".equals(opcao)) {
 
 			int id= Integer.parseInt(request.getParameter("id"));
 
@@ -67,12 +70,11 @@ public class ServletControlador extends HttpServlet {
 			proximaPagina= "listar.jsp";	
 			
 		}
-
-
-
-
-
-
+		
+		
+		
+		
+		
 		request.getRequestDispatcher(proximaPagina).forward(request, response);
 	}
 }
