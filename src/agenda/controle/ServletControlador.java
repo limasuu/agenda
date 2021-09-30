@@ -69,11 +69,29 @@ public class ServletControlador extends HttpServlet {
 			request.setAttribute("lista", agenda.getAniversariosPorMes(mes));
 			proximaPagina= "listar.jsp";	
 			
+		}else if("alterar-data".equals(opcao)) {
+			
+			request.setAttribute("opcao", "digitar-alterar-data");
+			request.setAttribute("lista", agenda.getAniversarios());
+			proximaPagina= "listar.jsp";
+
+		}else if("digitar-alterar-data".equals(opcao)) {
+
+			request.setAttribute("id", request.getParameter("id"));
+			
+			proximaPagina= "alterar-data.jsp";
 		}
 		
-		
-		
-		
+		else if("confirmar-alterar-data".equals(opcao)) {
+
+			int id= Integer.parseInt(request.getParameter("id"));						
+			
+			int dia= Integer.parseInt(request.getParameter("dia"));
+			int mes= Integer.parseInt(request.getParameter("mes"));
+			int ano= Integer.parseInt(request.getParameter("ano"));			
+
+			agenda.editarDataAniversario(id, LocalDateTime.of(ano, mes, dia, 0, 0));	
+		}
 		
 		request.getRequestDispatcher(proximaPagina).forward(request, response);
 	}

@@ -23,7 +23,7 @@
 				
 		
 		<%if("confirmar-remover".equals(request.getAttribute("opcao")) ||
-			"confirmar-alterar-data".equals(request.getAttribute("opcao"))){				
+			"digitar-alterar-data".equals(request.getAttribute("opcao"))){				
 		%>
 		<p>Selecione um aniversário:</p>
 		<form action="ServletControlador" method="post">
@@ -42,7 +42,7 @@
 				<tr>
 				
 					<%if("confirmar-remover".equals(request.getAttribute("opcao")) ||
-						"confirmar-alterar-data".equals(request.getAttribute("opcao"))){				
+						"digitar-alterar-data".equals(request.getAttribute("opcao"))){				
 					%>
 					<td><input type="radio" name="id" value=<%=a.getId()%>></input></td>				
 							
@@ -59,7 +59,7 @@
 			</table>
 						
 			<%if("confirmar-remover".equals(request.getAttribute("opcao")) ||
-				"confirmar-alterar-data".equals(request.getAttribute("opcao"))){				
+				"digitar-alterar-data".equals(request.getAttribute("opcao"))){				
 			%>
 			
 			<br/>
