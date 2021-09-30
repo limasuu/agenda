@@ -42,7 +42,7 @@ public class ServletControlador extends HttpServlet {
 
 			agenda.adicionarAniversario(aniversario);		
 
-		}if("remover".equals(opcao))
+		}else if("remover".equals(opcao))
 			proximaPagina= "remover.jsp";
 
 		else if("confirmar-remover".equals(opcao)) {
@@ -55,6 +55,17 @@ public class ServletControlador extends HttpServlet {
 
 			request.setAttribute("lista", agenda.getAniversarios());
 			proximaPagina= "listar.jsp";		
+			
+		}else if("listar-mes".equals(opcao))
+			proximaPagina= "listar-mes.jsp";
+
+		else if("confirmar-listar-mes".equals(opcao)) {
+
+			int mes= Integer.parseInt(request.getParameter("mes"));
+			
+			request.setAttribute("lista", agenda.getAniversariosPorMes(mes));
+			proximaPagina= "listar.jsp";	
+			
 		}
 
 
